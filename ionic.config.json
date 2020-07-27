@@ -1,0 +1,7 @@
+{
+  "name": "Packit",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
