@@ -16,6 +16,8 @@ import ExploreContainer from '../components/ExploreContainer';
 import './Trips.css';
 import Trip from "../classes/Trip";
 
+export let trips_list: Trip[] = [];
+
 const Trips: React.FC = () => {
   return (
     <IonPage>
@@ -49,30 +51,28 @@ const Trips: React.FC = () => {
 };
 
 function displayTrips() {
-  useEffect(() => {
+  // useEffect(() => {
+  //     toReturn.push(
+  //       <IonItem>
+  //         <IonLabel>
+  //           <h2>{data.tripName}</h2>
+  //           <h3>{data.startDate} - {data.endDate}</h3>
+  //         </IonLabel>
+  //       </IonItem>
+  //   }, [data]
+  // )
+  let toReturn: any[] = [];
+    for (let tr of trips_list) { //Todo: Change this useState.trips
       toReturn.push(
-        <IonItem>
+        <IonItem href="">
           <IonLabel>
-            <h2>{data.tripName}</h2>
-            <h3>{data.startDate} - {data.endDate}</h3>
+            <h2>{tr.tripName}</h2>
+            <h3>{tr.startDate} - {tr.endDate}</h3>
           </IonLabel>
         </IonItem>
-    }, [data]
-  )
-  // let toReturn: any[] = [];
-  //
-  // for (let t of useContext()) { //Todo: Change this useState.trips
-  //   toReturn.push(
-  //     <IonItem>
-  //       <IonLabel>
-  //         <h2>{t.tripName}</h2>
-  //         <h3>{t.startDate} - {t.endDate}</h3>
-  //       </IonLabel>
-  //     </IonItem>
-  //   )
-  // }
-  //
-  // return toReturn
+      )
+    }
+  return toReturn
 }
 
 

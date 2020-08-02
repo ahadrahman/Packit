@@ -12,7 +12,7 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
 import Trips from './pages/Trips';
-import Tab2 from './pages/Tab2';
+import Suitcases from './pages/Suitcases';
 import Tab3 from './pages/Tab3';
 import AddTrip from "./pages/AddTrip";
 
@@ -43,7 +43,7 @@ const App: React.FC = () => (
         <IonRouterOutlet>
           <Route path="/trips" component={Trips} exact={true} />
           <Route path="/addtrip" component={AddTrip} />
-          <Route path="/tab2" component={Tab2} exact={true} />
+          <Route path="/suitcases" component={Suitcases} exact={true} />
           <Route path="/tab3" component={Tab3} />
           <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
         </IonRouterOutlet>
@@ -52,9 +52,9 @@ const App: React.FC = () => (
             <IonIcon icon={triangle} />
             <IonLabel>Trips</IonLabel>
           </IonTabButton>
-          <IonTabButton tab="tab2" href="/tab2">
+          <IonTabButton tab="suitcases" href="/suitcases">
             <IonIcon icon={ellipse} />
-            <IonLabel>Tab 2</IonLabel>
+            <IonLabel>Suitcases</IonLabel>
           </IonTabButton>
           <IonTabButton tab="tab3" href="/tab3">
             <IonIcon icon={square} />

@@ -13,7 +13,8 @@ const AddTripForm: React.FC = () => {
     console.log(data);
     let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate);
     trip.display();
-    // trips_list.push(trip);
+
+    trips_list.push(trip);
     setData(trip as any);
   };
 
