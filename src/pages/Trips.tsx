@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {
-  IonButton,
+  IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonContent,
   IonFab,
   IonFabButton,
@@ -15,10 +15,27 @@ import { add } from 'ionicons/icons';
 import ExploreContainer from '../components/ExploreContainer';
 import './Trips.css';
 import Trip from "../classes/Trip";
+import firebase from "firebase";
 
 export let trips_list: Trip[] = [];
 
+
+
 const Trips: React.FC = () => {
+
+  const [trips, setTrips] = useState([]);
+
+  let tripsRef = firebase.database().ref('/trips');
+
+  useEffect(() => {
+      tripsRef.on('value', snapshot => {
+        let data = snapshot.val();
+        if (data != null) {
+          setTrips(Object.values(data));
+        }
+      });
+  });
+
   return (
     <IonPage>
       <IonHeader>
@@ -29,16 +46,24 @@ const Trips: React.FC = () => {
       <IonContent>
 
         <IonList>
-          {displayTrips()}
+          {
+            trips.length ? (
+              trips.map((tr: Trip) => (
+                <IonItem href="">
+                  <IonLabel>
+                    <h2>{tr.tripName}</h2>
+                  </IonLabel>
+                </IonItem>
+              ))
+            ) : (
+              <IonCard>
+                <IonCardHeader>
+                  <IonCardTitle>No Trips found. Why don't you add one?</IonCardTitle>
+                </IonCardHeader>
+              </IonCard>
+            )
+          }
         </IonList>
-        {/*<IonHeader collapse="condense">*/}
-        {/*  <IonToolbar>*/}
-        {/*    <IonTitle size="large">Your Trips</IonTitle>*/}
-        {/*  </IonToolbar>*/}
-        {/*</IonHeader>*/}
-        {/*<ExploreContainer name="Your Trips Page" />*/}
-
-        {/*Add Trip Button on bottom right*/}
         <IonFab vertical="bottom" horizontal="end" slot="fixed">
           <IonFabButton href="/addtrip">
             <IonIcon icon={add} />
@@ -49,31 +74,6 @@ const Trips: React.FC = () => {
     </IonPage>
   );
 };
-
-function displayTrips() {
-  // useEffect(() => {
-  //     toReturn.push(
-  //       <IonItem>
-  //         <IonLabel>
-  //           <h2>{data.tripName}</h2>
-  //           <h3>{data.startDate} - {data.endDate}</h3>
-  //         </IonLabel>
-  //       </IonItem>
-  //   }, [data]
-  // )
-  let toReturn: any[] = [];
-    for (let tr of trips_list) { //Todo: Change this useState.trips
-      toReturn.push(
-        <IonItem href="">
-          <IonLabel>
-            <h2>{tr.tripName}</h2>
-            <h3>{tr.startDate} - {tr.endDate}</h3>
-          </IonLabel>
-        </IonItem>
-      )
-    }
-  return toReturn
-}
 
 
 export default Trips;

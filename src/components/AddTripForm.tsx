@@ -3,19 +3,21 @@ import React, {useState} from 'react';
 import {IonList, IonItem, IonLabel, IonText, IonInput, IonDatetime, IonButton} from '@ionic/react';
 import Trip from "../classes/Trip";
 import {trips_list} from "../pages/Trips";
+import firebase from "firebase";
 
 const AddTripForm: React.FC = () => {
   const { control, register, handleSubmit, errors, formState } = useForm();
 
-  const [data, setData] = useState();
+  const [trips, setTrips] = useState();
 
   const onSubmit = (data: any) => {
-    console.log(data);
     let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate);
-    trip.display();
-
-    trips_list.push(trip);
-    setData(trip as any);
+    let tripsRef = firebase.database().ref('/trips');
+    tripsRef.push({
+      tripName: trip.tripName,
+      startDate: trip.startDate,
+      endDate: trip.endDate,
+    });
   };
 
   return (
