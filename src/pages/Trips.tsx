@@ -17,9 +17,7 @@ import './Trips.css';
 import Trip from "../classes/Trip";
 import firebase from "firebase";
 
-export let trips_list: Trip[] = [];
-
-
+export let allTrips: Trip[] = [];
 
 const Trips: React.FC = () => {
 
@@ -32,9 +30,12 @@ const Trips: React.FC = () => {
         let data = snapshot.val();
         if (data != null) {
           setTrips(Object.values(data));
+          allTrips = allTrips.concat(Object.values(data));
+          console.log(allTrips);
         }
       });
-  });
+
+  }, [] );
 
   return (
     <IonPage>
@@ -44,12 +45,11 @@ const Trips: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent>
-
         <IonList>
           {
             trips.length ? (
               trips.map((tr: Trip) => (
-                <IonItem href="">
+                <IonItem href={"trips/" + tr.tripName} >
                   <IonLabel>
                     <h2>{tr.tripName}</h2>
                   </IonLabel>
@@ -69,11 +69,9 @@ const Trips: React.FC = () => {
             <IonIcon icon={add} />
           </IonFabButton>
         </IonFab>
-
       </IonContent>
     </IonPage>
   );
 };
-
 
 export default Trips;

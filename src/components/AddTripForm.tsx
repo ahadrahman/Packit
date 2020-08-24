@@ -2,7 +2,6 @@ import { useForm, Controller } from "react-hook-form";
 import React, {useState} from 'react';
 import {IonList, IonItem, IonLabel, IonText, IonInput, IonDatetime, IonButton} from '@ionic/react';
 import Trip from "../classes/Trip";
-import {trips_list} from "../pages/Trips";
 import firebase from "firebase";
 
 const AddTripForm: React.FC = () => {

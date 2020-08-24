@@ -4,7 +4,7 @@ import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
-  IonLabel,
+  IonLabel, IonRoute,
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
@@ -36,6 +36,7 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 import {firebaseConfig} from "./credentials";
+import TripDetails from "./pages/TripDetails";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -44,7 +45,8 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/trips" component={Trips} exact={true} />
+          <Route path="/trips" component={Trips} />
+          <Route path="/trips/:id" component={TripDetails} />
           <Route path="/addtrip" component={AddTrip} />
           <Route path="/suitcases" component={Suitcases} exact={true} />
           <Route path="/tab3" component={Tab3} />
