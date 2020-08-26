@@ -12,5 +12,9 @@ export class Trip {
   display(): void {
     alert("TripName: " + this.tripName + "\n" + "Start Date: " + this.startDate + "\n" + "End Date: " + this.endDate);
   }
+
+  formatDate(): string {
+    return this.startDate + " to " + this.endDate;
+  }
 }
 export default Trip;

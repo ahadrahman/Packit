@@ -7,8 +7,6 @@ import firebase from "firebase";
 const AddTripForm: React.FC = () => {
   const { control, register, handleSubmit, errors, formState } = useForm();
 
-  const [trips, setTrips] = useState();
-
   const onSubmit = (data: any) => {
     let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate);
     let tripsRef = firebase.database().ref('/trips');

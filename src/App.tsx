@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle } from 'ionicons/icons';
-import Trips from './pages/Trips';
+import ListTrips from './pages/ListTrips';
 import Suitcases from './pages/Suitcases';
 import Tab3 from './pages/Tab3';
 import AddTrip from "./pages/AddTrip";
@@ -37,15 +37,17 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import {firebaseConfig} from "./credentials";
 import TripDetails from "./pages/TripDetails";
+import {TripsContextProvider} from "./TripsState";
 
 firebase.initializeApp(firebaseConfig);
 
 const App: React.FC = () => (
   <IonApp>
+    <TripsContextProvider>
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet>
-          <Route path="/trips" component={Trips} />
+          <Route path="/trips" component={ListTrips} />
           <Route path="/trips/:id" component={TripDetails} />
           <Route path="/addtrip" component={AddTrip} />
           <Route path="/suitcases" component={Suitcases} exact={true} />
@@ -68,6 +70,7 @@ const App: React.FC = () => (
         </IonTabBar>
       </IonTabs>
     </IonReactRouter>
+    </TripsContextProvider>
   </IonApp>
 
 );
