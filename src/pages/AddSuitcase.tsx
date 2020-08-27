@@ -15,7 +15,8 @@ const AddSuitcase: React.FC<AddSuitcase> = ({match}) => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/trips"/>
+              {/*{`../assets/suitcases/${s.colour}.png`}*/}
+              <IonBackButton defaultHref={`/trips/${tripName}`}/>
             </IonButtons>
             <IonTitle>Add Suitcase for {tripName}</IonTitle>
           </IonToolbar>

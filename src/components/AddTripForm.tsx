@@ -14,9 +14,6 @@ const AddTripForm: React.FC = () => {
       tripName: trip.tripName,
       startDate: trip.startDate,
       endDate: trip.endDate,
-      suitcases: [{
-        suitcaseName: "",
-      }],
     }).key;
     if (tripID != null) {
       tripsRef.child(tripID).update({'id': tripID});

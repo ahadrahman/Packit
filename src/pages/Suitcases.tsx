@@ -14,7 +14,7 @@ import {
 import ExploreContainer from '../components/ExploreContainer';
 import './Suitcases.css';
 import {add} from "ionicons/icons";
-import blue from '../img/suitcases/blue.png'; // Tell webpack this JS file uses this image
+// import blue from '/assets/suitcases/blue.png'; // Tell webpack this JS file uses this image
 
 const Suitcases: React.FC = () => {
   return (
@@ -32,7 +32,7 @@ const Suitcases: React.FC = () => {
 
           <IonItem href="">
             <IonAvatar slot="start">
-              <img src={blue}/>
+              {/*<img src={blue}/>*/}
             </IonAvatar>
             <IonLabel>Clothing bag</IonLabel>
           </IonItem>

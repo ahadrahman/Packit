@@ -8,7 +8,7 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonItem, IonItemDivider, IonItemGroup, IonList, IonFab, IonFabButton, IonIcon
+  IonItem, IonItemDivider, IonItemGroup, IonList, IonFab, IonFabButton, IonIcon, IonAvatar
 } from "@ionic/react";
 import React, {useContext, useEffect, useState} from "react";
 import {RouteComponentProps} from "react-router";
@@ -18,6 +18,7 @@ import firebase from "firebase";
 import {add} from "ionicons/icons";
 import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
 import Suitcase from "../classes/Suitcase";
+// import green from "../../public/assets/suitcases/green.png";
 
 interface TripDetailsProps extends RouteComponentProps<{
   id: string;
@@ -32,7 +33,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
   console.log(suitcases);
 
   let currentTripName: string = match.params.id;
-  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 1, 1), new Date(1975, 1, 1));
+  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26));
 
   trips.forEach((t: Trip) => {
     if (t.tripName === currentTripName) {
@@ -76,6 +77,9 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
                 { (context.suitcases.length)
                   ? context.suitcases.map((s: Suitcase) =>
                     <IonItem href="">
+                      <IonAvatar slot="start">
+                        <img src={`../assets/suitcases/${s.colour}.png`}/>
+                      </IonAvatar>
                       <IonLabel>
                         <h2>{s.suitcaseName}</h2>
                       </IonLabel>

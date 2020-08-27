@@ -3,10 +3,10 @@ export class Suitcase {
   id: string;
   colour: string;
 
-  constructor(suitcaseName: string) {
+  constructor(suitcaseName: string, colour: string) {
     this.suitcaseName = suitcaseName;
     this.id = "";
-    this.colour = "green";
+    this.colour = colour;
   }
 
   display(): void {
