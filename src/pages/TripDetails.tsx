@@ -4,16 +4,18 @@ import {
   IonCard, IonCardContent,
   IonCardHeader, IonCardSubtitle, IonCardTitle,
   IonContent,
-  IonHeader,
+  IonHeader, IonLabel,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonItem, IonItemDivider, IonItemGroup, IonList, IonFab, IonFabButton, IonIcon
 } from "@ionic/react";
 import React, {useContext, useEffect, useState} from "react";
 import {RouteComponentProps} from "react-router";
 import Trip from "../classes/Trip";
 import {Trips, TripsContext, TripsContextConsumer} from "../TripsState";
 import firebase from "firebase";
+import {add} from "ionicons/icons";
 
 interface TripDetailsProps extends RouteComponentProps<{
   id: string;
@@ -34,6 +36,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
   });
 
   let content: string = formatDate(currentTrip);
+  let suitcasehref = "trips/" + currentTripName + "/addsuitcase";
 
   return (
     <IonPage>
@@ -56,6 +59,22 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
             {content}
           </IonCardContent>
         </IonCard>
+
+        <IonItemDivider>
+          <IonLabel>Suitcases</IonLabel>
+        </IonItemDivider>
+        <IonList>
+          <IonItem>
+            Drake yy
+          </IonItem>
+        </IonList>
+
+        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+          <IonFabButton href={suitcasehref}>
+            <IonIcon icon={add} />
+          </IonFabButton>
+        </IonFab>
+
       </IonContent>
     </IonPage>
   );

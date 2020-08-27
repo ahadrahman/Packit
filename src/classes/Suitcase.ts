@@ -1,16 +1,18 @@
 export class Suitcase {
-  tripName: string;
-  startDate: Date;
-  endDate: Date;
+  suitcaseName: string;
+  id: string;
 
-  constructor(tripname: string, startdate: Date, enddate: Date) {
-    this.tripName = tripname;
-    this.startDate = startdate;
-    this.endDate = enddate;
+  constructor(suitcaseName: string) {
+    this.suitcaseName = suitcaseName;
+    this.id = "";
   }
 
   display(): void {
-    alert("TripName: " + this.tripName + "\n" + "Start Date: " + this.startDate + "\n" + "End Date: " + this.endDate);
+    alert("Suitcase Name: " + this.suitcaseName);
+  }
+
+  setID(id: string) {
+    this.id = id;
   }
 }
 export default Suitcase;

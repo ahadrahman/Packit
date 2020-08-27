@@ -38,6 +38,7 @@ import './theme/variables.css';
 import {firebaseConfig} from "./credentials";
 import TripDetails from "./pages/TripDetails";
 import {TripsContextProvider} from "./TripsState";
+import AddSuitcase from './pages/AddSuitcase';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -51,6 +52,7 @@ const App: React.FC = () => (
           <Route path="/trips/:id" component={TripDetails} />
           <Route path="/addtrip" component={AddTrip} />
           <Route path="/suitcases" component={Suitcases} exact={true} />
+          <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
           <Route path="/tab3" component={Tab3} />
           <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
         </IonRouterOutlet>

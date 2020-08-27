@@ -10,11 +10,17 @@ const AddTripForm: React.FC = () => {
   const onSubmit = (data: any) => {
     let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate);
     let tripsRef = firebase.database().ref('/trips');
-    tripsRef.push({
+    let tripID = tripsRef.push({
       tripName: trip.tripName,
       startDate: trip.startDate,
       endDate: trip.endDate,
-    });
+      suitcases: [{
+        suitcaseName: "",
+      }],
+    }).key;
+    if (tripID != null) {
+      tripsRef.child(tripID).update({'id': tripID});
+    }
   };
 
   return (
