@@ -16,6 +16,7 @@ import ListTrips from './pages/ListTrips';
 import Suitcases from './pages/Suitcases';
 import Tab3 from './pages/Tab3';
 import AddTrip from "./pages/AddTrip";
+import SuitcaseDetails from "./pages/SuitcaseDetails";
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -51,6 +52,7 @@ const App: React.FC = () => (
           <IonRouterOutlet>
             <Route path="/trips" component={ListTrips} />
             <Route path="/trips/:id" component={TripDetails} />
+            <Route path="/trips/:id/:suitcaseID" component={SuitcaseDetails} />
             <Route path="/addtrip" component={AddTrip} />
             <Route path="/suitcases" component={Suitcases} exact={true} />
             <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />

@@ -28,9 +28,6 @@ interface TripDetailsProps extends RouteComponentProps<{
 const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
 
   const { trips } = useContext(TripsContext);
-  const { suitcases } = useContext(SuitcasesContext);
-
-  console.log(suitcases);
 
   let currentTripName: string = match.params.id;
   let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26));
@@ -76,7 +73,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
               <IonList>
                 { (context.suitcases.length)
                   ? context.suitcases.map((s: Suitcase) =>
-                    <IonItem href="">
+                    <IonItem href={"trips/" + currentTrip.tripName + "/" + s.suitcaseName}>
                       <IonAvatar slot="start">
                         <img src={`../assets/suitcases/${s.colour}.png`}/>
                       </IonAvatar>

@@ -57,9 +57,12 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
     }).key;
     if (suitcaseID != null) {
       dbRef.child(suitcaseID).update({'id': suitcaseID});
+      // suitcase.setID(suitcaseID);
+      // currentTrip.suitcases.push(suitcase);
     }
     dbRef.child("/0").remove();
     // tripsRef.child(currentTrip.id).update({'suitcases': "will put suitcases here"});
+
 
 
   };
