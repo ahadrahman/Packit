@@ -16,6 +16,8 @@ import Trip from "../classes/Trip";
 import {Trips, TripsContext, TripsContextConsumer} from "../TripsState";
 import firebase from "firebase";
 import {add} from "ionicons/icons";
+import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
+import Suitcase from "../classes/Suitcase";
 
 interface TripDetailsProps extends RouteComponentProps<{
   id: string;
@@ -25,6 +27,9 @@ interface TripDetailsProps extends RouteComponentProps<{
 const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
 
   const { trips } = useContext(TripsContext);
+  const { suitcases } = useContext(SuitcasesContext);
+
+  console.log(suitcases);
 
   let currentTripName: string = match.params.id;
   let currentTrip: Trip = new Trip("Loading...", new Date(1975, 1, 1), new Date(1975, 1, 1));
@@ -39,49 +44,72 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
   let suitcasehref = "trips/" + currentTripName + "/addsuitcase";
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton defaultHref="/trips"/>
-          </IonButtons>
-          <IonTitle>
-            {currentTrip.tripName} Details
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <IonCard>
-          <IonCardHeader>
-            <IonCardTitle>{currentTrip.tripName}</IonCardTitle>
-          </IonCardHeader>
-          <IonCardContent>
-            {content}
-          </IonCardContent>
-        </IonCard>
+    <SuitcasesContextProvider tripID={currentTrip.id}>
+      <IonPage>
+        <IonHeader>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonBackButton defaultHref="/trips"/>
+            </IonButtons>
+            <IonTitle>
+              {currentTrip.tripName} Details
+            </IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonCard>
+            <IonCardHeader>
+              <IonCardTitle>{currentTrip.tripName}</IonCardTitle>
+            </IonCardHeader>
+            <IonCardContent>
+              {content}
+            </IonCardContent>
+          </IonCard>
 
-        <IonItemDivider>
-          <IonLabel>Suitcases</IonLabel>
-        </IonItemDivider>
-        <IonList>
-          <IonItem>
-            Drake yy
-          </IonItem>
-        </IonList>
+          <IonItemDivider>
+            <IonLabel>Suitcases</IonLabel>
+          </IonItemDivider>
 
-        <IonFab vertical="bottom" horizontal="end" slot="fixed">
-          <IonFabButton href={suitcasehref}>
-            <IonIcon icon={add} />
-          </IonFabButton>
-        </IonFab>
+          <SuitcasesContextConsumer>
+            { (context : Suitcases) =>
+              <IonList>
+                { (context.suitcases.length)
+                  ? context.suitcases.map((s: Suitcase) =>
+                    <IonItem href="">
+                      <IonLabel>
+                        <h2>{s.suitcaseName}</h2>
+                      </IonLabel>
+                    </IonItem>
+                  ) : (
+                    <IonCard>
+                      <IonCardHeader>
+                        <IonCardTitle>No Suitcases found. Why don't you add one?</IonCardTitle>
+                      </IonCardHeader>
+                    </IonCard>
+                  )
+                }
+              </IonList>
+            }
+          </SuitcasesContextConsumer>
 
-      </IonContent>
-    </IonPage>
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFabButton href={suitcasehref}>
+              <IonIcon icon={add} />
+            </IonFabButton>
+          </IonFab>
+
+        </IonContent>
+      </IonPage>
+    </SuitcasesContextProvider>
   );
 };
 
 function formatDate(t: Trip): string {
-  return t.startDate + " to " + t.endDate;
+  if (t.tripName === "Loading...") {
+    return "Loading..."
+  } else {
+    return t.startDate + " to " + t.endDate;
+  }
 }
 
 export default TripDetails;

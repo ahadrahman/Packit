@@ -39,39 +39,40 @@ import {firebaseConfig} from "./credentials";
 import TripDetails from "./pages/TripDetails";
 import {TripsContextProvider} from "./TripsState";
 import AddSuitcase from './pages/AddSuitcase';
+import {SuitcasesContextProvider} from "./SuitcasesState";
 
 firebase.initializeApp(firebaseConfig);
 
 const App: React.FC = () => (
   <IonApp>
     <TripsContextProvider>
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route path="/trips" component={ListTrips} />
-          <Route path="/trips/:id" component={TripDetails} />
-          <Route path="/addtrip" component={AddTrip} />
-          <Route path="/suitcases" component={Suitcases} exact={true} />
-          <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
-          <Route path="/tab3" component={Tab3} />
-          <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
-        </IonRouterOutlet>
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="trips" href="/trips">
-            <IonIcon icon={triangle} />
-            <IonLabel>Trips</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="suitcases" href="/suitcases">
-            <IonIcon icon={ellipse} />
-            <IonLabel>Suitcases</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="tab3" href="/tab3">
-            <IonIcon icon={square} />
-            <IonLabel>Tab 3</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-      </IonTabs>
-    </IonReactRouter>
+      <IonReactRouter>
+        <IonTabs>
+          <IonRouterOutlet>
+            <Route path="/trips" component={ListTrips} />
+            <Route path="/trips/:id" component={TripDetails} />
+            <Route path="/addtrip" component={AddTrip} />
+            <Route path="/suitcases" component={Suitcases} exact={true} />
+            <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
+            <Route path="/tab3" component={Tab3} />
+            <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
+          </IonRouterOutlet>
+          <IonTabBar slot="bottom">
+            <IonTabButton tab="trips" href="/trips">
+              <IonIcon icon={triangle} />
+              <IonLabel>Trips</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="suitcases" href="/suitcases">
+              <IonIcon icon={ellipse} />
+              <IonLabel>Suitcases</IonLabel>
+            </IonTabButton>
+            <IonTabButton tab="tab3" href="/tab3">
+              <IonIcon icon={square} />
+              <IonLabel>Tab 3</IonLabel>
+            </IonTabButton>
+          </IonTabBar>
+        </IonTabs>
+      </IonReactRouter>
     </TripsContextProvider>
   </IonApp>
 
