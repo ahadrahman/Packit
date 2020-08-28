@@ -17,6 +17,8 @@ import Suitcases from './pages/Suitcases';
 import Tab3 from './pages/Tab3';
 import AddTrip from "./pages/AddTrip";
 import SuitcaseDetails from "./pages/SuitcaseDetails";
+import AddItem from "./pages/AddItem";
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -56,6 +58,7 @@ const App: React.FC = () => (
             <Route path="/addtrip" component={AddTrip} />
             <Route path="/suitcases" component={Suitcases} exact={true} />
             <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
+            <Route path="/trips/:id/:suitcaseID/additem" component={AddItem} />
             <Route path="/tab3" component={Tab3} />
             <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
           </IonRouterOutlet>
@@ -77,7 +80,6 @@ const App: React.FC = () => (
       </IonReactRouter>
     </TripsContextProvider>
   </IonApp>
-
 );
 
 export default App;

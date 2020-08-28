@@ -1,12 +1,16 @@
+import Item from "./Item";
+
 export class Suitcase {
   suitcaseName: string;
   id: string;
   colour: string;
+  items: Item[];
 
   constructor(suitcaseName: string, colour: string) {
     this.suitcaseName = suitcaseName;
     this.id = "";
     this.colour = colour;
+    this.items = [];
   }
 
   display(): void {

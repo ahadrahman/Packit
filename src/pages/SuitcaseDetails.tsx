@@ -1,24 +1,31 @@
 import React, {useContext} from "react";
 import {
-  IonAvatar,
   IonBackButton,
   IonButtons,
-  IonCard, IonCardContent,
-  IonCardHeader, IonCardTitle,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
   IonContent,
+  IonFab,
+  IonFabButton,
+  IonFabList,
   IonHeader,
+  IonIcon,
+  IonImg,
   IonPage,
   IonTitle,
-  IonToolbar,
-  IonItem,
-  IonImg
+  IonToolbar
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
-import {SuitcasesContext, SuitcasesContextProvider} from "../SuitcasesState";
+import {SuitcasesContextProvider} from "../SuitcasesState";
 import Trip from "../classes/Trip";
 import Suitcase from "../classes/Suitcase";
 import './SuitcaseDetails.css';
+import {add, camera, image} from "ionicons/icons";
+import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@capacitor/core";
+import { useCamera } from '@ionic/react-hooks/camera';
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
   id: string;
@@ -54,14 +61,18 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
       currentSuitcase = new Suitcase(x[1].suitcaseName, x[1].colour);
     }
   }
+  // let itemhref = "trips/" + currentTrip.tripName + "/" + currentSuitcase.suitcaseName + "/additem";
 
-  //
-  // suitcases.forEach((s: Suitcase) => {
-  //   if (s.suitcaseName === suitcaseName) {
-  //     currentSuitcase = s;
-  //   }
-  // });
+  const { getPhoto } = useCamera();
 
+  const takePhoto = async () => {
+    const image = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100
+    });
+    console.log(image);
+  };
 
   return (
     <SuitcasesContextProvider tripID={currentTrip.id}>
@@ -90,10 +101,25 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
                 This suitcase is part of your {currentTrip.tripName} trip.
               </IonCardContent>
           </IonCard>
+
+          <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFabButton>
+              <IonIcon icon={add} />
+            </IonFabButton>
+            <IonFabList side="top">
+              <IonFabButton onClick={() => takePhoto()}>
+                <IonIcon icon={camera} />
+              </IonFabButton>
+              <IonFabButton>
+                <IonIcon icon={image} />
+              </IonFabButton>
+            </IonFabList>
+          </IonFab>
+
         </IonContent>
       </IonPage>
     </SuitcasesContextProvider>
   );
-}
+};
 
 export default SuitcaseDetails;
