@@ -29,7 +29,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
 
   const { trips } = useContext(TripsContext);
 
-  let currentTripName: string = match.params.id;
+  let currentTripName: string = match.params.id; //Drake Concert
   let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26));
 
   trips.forEach((t: Trip) => {

@@ -15,7 +15,10 @@ import {
   IonImg,
   IonPage,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  IonRow,
+  IonGrid,
+  IonCol, IonItemDivider, IonLabel
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
@@ -26,6 +29,8 @@ import './SuitcaseDetails.css';
 import {add, camera, image} from "ionicons/icons";
 import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@capacitor/core";
 import { useCamera } from '@ionic/react-hooks/camera';
+import firebase from "firebase";
+import {usePhotoGallery} from "../usePhotoGallery";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
   id: string;
@@ -63,16 +68,13 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
   }
   // let itemhref = "trips/" + currentTrip.tripName + "/" + currentSuitcase.suitcaseName + "/additem";
 
-  const { getPhoto } = useCamera();
 
-  const takePhoto = async () => {
-    const image = await Camera.getPhoto({
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-      quality: 100
-    });
-    console.log(image);
-  };
+    // if (image instanceof Camera) {
+    //   console.log(image.base64String);
+    // }
+    // let captureDataUrl = 'data:image/jpeg;base64,' + image.base64String;
+
+  const { photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
 
   return (
     <SuitcasesContextProvider tripID={currentTrip.id}>
@@ -80,7 +82,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              <IonBackButton defaultHref="/trips"/>
+              <IonBackButton defaultHref={`/trips/${currentTrip.tripName}`}/>
             </IonButtons>
             <IonTitle>
               Inside {suitcaseName} Suitcase
@@ -102,12 +104,26 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               </IonCardContent>
           </IonCard>
 
+          <IonItemDivider>
+            <IonLabel>Items</IonLabel>
+          </IonItemDivider>
+
+          <IonGrid>
+            <IonRow>
+              {photos.map((photo, index) => (
+                <IonCol size="6" key={index}>
+                  <IonImg src={photo.base64 ?? photo.webviewPath} />
+                </IonCol>
+              ))}
+            </IonRow>
+          </IonGrid>
+
           <IonFab vertical="bottom" horizontal="end" slot="fixed">
             <IonFabButton>
               <IonIcon icon={add} />
             </IonFabButton>
             <IonFabList side="top">
-              <IonFabButton onClick={() => takePhoto()}>
+              <IonFabButton onClick={t => takePhoto()}>
                 <IonIcon icon={camera} />
               </IonFabButton>
               <IonFabButton>
