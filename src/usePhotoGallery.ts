@@ -73,13 +73,16 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       data: base64Data,
       directory: FilesystemDirectory.Data
     });
+
+    // Get Computer Vision terms here
+
     // Use webPath to display the new image instead of base64 since it's
     // already loaded into memory
     return {
       filepath: fileName,
       webviewPath: photo.webPath,
       identifier: identifier,
-      description: "Dummy Text",
+      description: "Dummy Text", //Set Computer Vision term here
     };
   };
 

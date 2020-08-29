@@ -18,7 +18,7 @@ import {
   IonToolbar,
   IonRow,
   IonGrid,
-  IonCol, IonItemDivider, IonLabel, IonActionSheet
+  IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
@@ -32,6 +32,7 @@ import { useCamera } from '@ionic/react-hooks/camera';
 import firebase from "firebase";
 import {Photo, usePhotoGallery} from "../usePhotoGallery";
 import {computerVision} from "../analyseImage";
+import MyModal from "../components/EditImageTextModal";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
   id: string;
@@ -76,7 +77,8 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
     // let captureDataUrl = 'data:image/jpeg;base64,' + image.base64String;
 
   const { deletePhoto, photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
-  const [photoSelected, setPhotoToDelete] = useState<Photo>();
+  const [photoSelected, setPhotoSelected] = useState<Photo>();
+  const [showModal, setShowModal] = useState(false);
 
   return (
     <SuitcasesContextProvider tripID={currentTrip.id}>
@@ -92,6 +94,15 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
           </IonToolbar>
         </IonHeader>
         <IonContent>
+
+          {photoSelected ? (
+            <IonModal isOpen={showModal} cssClass='my-custom-class' onDidDismiss={() => setPhotoSelected(undefined)}>
+              <MyModal photo={photoSelected}/>
+              <IonButton onClick={() => setShowModal(false)} >Close Modal</IonButton>
+            </IonModal>
+          ) : (<div></div>)
+          }
+
           <IonCard>
             {/*  <IonAvatar slot="start">*/}
                 <IonImg src={`../assets/suitcases/${currentSuitcase.colour}.png`} className="suitcaseDetails"/>
@@ -114,7 +125,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
             <IonRow>
               {photos.map((photo, index) => (
                 <IonCol size="6" key={index}>
-                  <IonImg onClick={() => setPhotoToDelete(photo)} src={photo.base64 ?? photo.webviewPath} />
+                  <IonImg onClick={() => setPhotoSelected(photo)} src={photo.base64 ?? photo.webviewPath} />
                   <div className="myOverlay">
                     <div className="card-title">{photo.description}</div>
                   </div>
@@ -146,7 +157,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               handler: () => {
                 if (photoSelected) {
                   deletePhoto(photoSelected);
-                  setPhotoToDelete(undefined);
+                  // setPhotoSelected(undefined);
                 }
               }
             }, {
@@ -161,8 +172,18 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
                   computerVision(photoSelected);
                 }
               }
-            }]}
-            onDidDismiss={() => setPhotoToDelete(undefined)}
+            }, {
+              text: 'Edit Text',
+              role: 'destructive',
+              handler: () => {
+                if (photoSelected) {
+                  setShowModal(true)
+                }
+              }
+            }
+
+            ]}
+            // onDidDismiss={() => setPhotoSelected(undefined)}
           />
 
         </IonContent>
@@ -170,5 +191,6 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
     </SuitcasesContextProvider>
   );
 };
+
 
 export default SuitcaseDetails;
