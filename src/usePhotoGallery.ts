@@ -24,22 +24,23 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       const photosString = await get(PHOTO_STORAGE);
       console.log(photosString);
       const photos = (photosString ? JSON.parse(photosString) : []) as Photo[];
+      let toReturnPhotos: Photo[] = [];
       if (photos.length) {
         for (let photo of photos) {
-          if (photo.filepath.includes(identifier)) {
-            console.log("yah yeet");
+          if (photo.filepath.includes(identifier) && !(identifier.includes("Loading..."))) {
             const file = await readFile({
               path: photo.filepath,
               directory: FilesystemDirectory.Data
             });
             photo.base64 = `data:image/jpeg;base64,${file.data}`;
+            toReturnPhotos.push(photo);
           } else {
-            photos.splice(photos.indexOf(photo), 1);
+            // deletePhoto(photo);
           }
           console.log(photo.filepath);
         }
       }
-      setPhotos(photos);
+      setPhotos(toReturnPhotos);
     };
     loadSaved();
   }, [get, readFile, identifier]);
@@ -71,8 +72,6 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       data: base64Data,
       directory: FilesystemDirectory.Data
     });
-
-
     // Use webPath to display the new image instead of base64 since it's
     // already loaded into memory
     return {
@@ -82,7 +81,25 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
     };
   };
 
+
+  const deletePhoto = async (photo: Photo) => {
+    // Remove this photo from the Photos reference data array
+    const newPhotos = photos.filter(p => p.filepath !== photo.filepath);
+
+    // Update photos array cache by overwriting the existing photo array
+    set(PHOTO_STORAGE, JSON.stringify(newPhotos));
+
+    // delete photo file from filesystem
+    const filename = photo.filepath.substr(photo.filepath.lastIndexOf('/') + 1);
+    await deleteFile({
+      path: filename,
+      directory: FilesystemDirectory.Data
+    });
+    setPhotos(newPhotos);
+  };
+
   return {
+    deletePhoto,
     photos,
     takePhoto
   };

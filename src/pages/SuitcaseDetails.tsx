@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {
   IonBackButton,
   IonButtons,
@@ -18,7 +18,7 @@ import {
   IonToolbar,
   IonRow,
   IonGrid,
-  IonCol, IonItemDivider, IonLabel
+  IonCol, IonItemDivider, IonLabel, IonActionSheet
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
@@ -26,11 +26,11 @@ import {SuitcasesContextProvider} from "../SuitcasesState";
 import Trip from "../classes/Trip";
 import Suitcase from "../classes/Suitcase";
 import './SuitcaseDetails.css';
-import {add, camera, image} from "ionicons/icons";
+import {add, camera, image, trash, close} from "ionicons/icons";
 import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@capacitor/core";
 import { useCamera } from '@ionic/react-hooks/camera';
 import firebase from "firebase";
-import {usePhotoGallery} from "../usePhotoGallery";
+import {Photo, usePhotoGallery} from "../usePhotoGallery";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
   id: string;
@@ -74,7 +74,8 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
     // }
     // let captureDataUrl = 'data:image/jpeg;base64,' + image.base64String;
 
-  const { photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
+  const { deletePhoto, photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
+  const [photoToDelete, setPhotoToDelete] = useState<Photo>();
 
   return (
     <SuitcasesContextProvider tripID={currentTrip.id}>
@@ -112,7 +113,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
             <IonRow>
               {photos.map((photo, index) => (
                 <IonCol size="6" key={index}>
-                  <IonImg src={photo.base64 ?? photo.webviewPath} />
+                  <IonImg onClick={() => setPhotoToDelete(photo)} src={photo.base64 ?? photo.webviewPath} />
                 </IonCol>
               ))}
             </IonRow>
@@ -131,6 +132,26 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               </IonFabButton>
             </IonFabList>
           </IonFab>
+
+          <IonActionSheet
+            isOpen={!!photoToDelete}
+            buttons={[{
+              text: 'Delete',
+              role: 'destructive',
+              icon: trash,
+              handler: () => {
+                if (photoToDelete) {
+                  deletePhoto(photoToDelete);
+                  setPhotoToDelete(undefined);
+                }
+              }
+            }, {
+              text: 'Cancel',
+              icon: close,
+              role: 'cancel'
+            }]}
+            onDidDismiss={() => setPhotoToDelete(undefined)}
+          />
 
         </IonContent>
       </IonPage>
