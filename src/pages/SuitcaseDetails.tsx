@@ -31,6 +31,7 @@ import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@cap
 import { useCamera } from '@ionic/react-hooks/camera';
 import firebase from "firebase";
 import {Photo, usePhotoGallery} from "../usePhotoGallery";
+import {computerVision} from "../analyseImage";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
   id: string;
@@ -75,7 +76,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
     // let captureDataUrl = 'data:image/jpeg;base64,' + image.base64String;
 
   const { deletePhoto, photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
-  const [photoToDelete, setPhotoToDelete] = useState<Photo>();
+  const [photoSelected, setPhotoToDelete] = useState<Photo>();
 
   return (
     <SuitcasesContextProvider tripID={currentTrip.id}>
@@ -114,6 +115,9 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               {photos.map((photo, index) => (
                 <IonCol size="6" key={index}>
                   <IonImg onClick={() => setPhotoToDelete(photo)} src={photo.base64 ?? photo.webviewPath} />
+                  <div className="myOverlay">
+                    <div className="card-title">{photo.description}</div>
+                  </div>
                 </IonCol>
               ))}
             </IonRow>
@@ -134,14 +138,14 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
           </IonFab>
 
           <IonActionSheet
-            isOpen={!!photoToDelete}
+            isOpen={!!photoSelected}
             buttons={[{
               text: 'Delete',
               role: 'destructive',
               icon: trash,
               handler: () => {
-                if (photoToDelete) {
-                  deletePhoto(photoToDelete);
+                if (photoSelected) {
+                  deletePhoto(photoSelected);
                   setPhotoToDelete(undefined);
                 }
               }
@@ -149,6 +153,14 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               text: 'Cancel',
               icon: close,
               role: 'cancel'
+            }, {
+              text: 'Computer Vision',
+              role: 'destructive',
+              handler: () => {
+                if (photoSelected) {
+                  computerVision(photoSelected);
+                }
+              }
             }]}
             onDidDismiss={() => setPhotoToDelete(undefined)}
           />

@@ -20,6 +20,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
     const loadSaved = async () => {
 
       // set(PHOTO_STORAGE, "");
+      console.log(FilesystemDirectory);
 
       const photosString = await get(PHOTO_STORAGE);
       console.log(photosString);
@@ -78,6 +79,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       filepath: fileName,
       webviewPath: photo.webPath,
       identifier: identifier,
+      description: "Dummy Text",
     };
   };
 
@@ -111,4 +113,5 @@ export interface Photo {
   webviewPath?: string;
   base64?: string;
   identifier: string;
+  description?: string;
 }
