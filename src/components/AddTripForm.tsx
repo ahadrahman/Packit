@@ -1,11 +1,12 @@
 import { useForm, Controller } from "react-hook-form";
 import React, {useState} from 'react';
-import {IonList, IonItem, IonLabel, IonText, IonInput, IonDatetime, IonButton} from '@ionic/react';
+import {IonList, IonItem, IonLabel, IonText, IonInput, IonDatetime, IonButton, IonToast} from '@ionic/react';
 import Trip from "../classes/Trip";
 import firebase from "firebase";
 
 const AddTripForm: React.FC = () => {
   const { control, register, handleSubmit, errors, formState } = useForm();
+  const [showToast, setShowToast] = useState(false);
 
   const onSubmit = (data: any) => {
     let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate, data.location);
@@ -19,6 +20,7 @@ const AddTripForm: React.FC = () => {
     if (tripID != null) {
       tripsRef.child(tripID).update({'id': tripID});
     }
+    setShowToast(true);
   };
 
   return (
@@ -65,6 +67,12 @@ const AddTripForm: React.FC = () => {
             Add Trip
           </IonButton>
         </form>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Trip has been added successfully."
+          duration={2000}
+        />
       </div>
   );
 };

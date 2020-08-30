@@ -12,7 +12,7 @@ import {
   IonSelect,
   IonRadioGroup,
   IonListHeader,
-  IonRadio, IonAvatar
+  IonRadio, IonAvatar, IonToast
 } from '@ionic/react';
 import Trip from "../classes/Trip";
 import firebase from "firebase";
@@ -30,6 +30,7 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
 
   const { control, register, handleSubmit, errors, formState } = useForm();
   const { trips } = useContext(TripsContext);
+  const [showToast, setShowToast] = useState(false);
 
   const onSubmit = (data: any) => {
     let suitcase: Suitcase = new Suitcase(data.suitcaseName, data.suitcaseColour);
@@ -62,7 +63,7 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
     }
     dbRef.child("/0").remove();
     // tripsRef.child(currentTrip.id).update({'suitcases': "will put suitcases here"});
-
+    setShowToast(true);
 
 
   };
@@ -121,6 +122,12 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
             Add Suitcase
           </IonButton>
         </form>
+        <IonToast
+          isOpen={showToast}
+          onDidDismiss={() => setShowToast(false)}
+          message="Suitcase has been added successfully."
+          duration={2000}
+        />
       </div>
   );
 };

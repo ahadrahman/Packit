@@ -72,7 +72,10 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
                         {s}
                       </IonItem>
                     ) : (
-                      <div><p>No tags found</p></div>
+                      <IonItem>
+                        <IonRadio slot="start" value="test"/>
+                        Test
+                      </IonItem>
                     )
                     }
                       </IonList>

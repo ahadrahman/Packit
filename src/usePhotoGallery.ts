@@ -86,7 +86,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       filepath: fileName,
       webviewPath: photo.webPath,
       identifier: identifier,
-      description: "Dummy Text", //Set Computer Vision term here
+      description: "unnamed", //Set Computer Vision term here
     };
   };
 
