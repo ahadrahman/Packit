@@ -18,6 +18,10 @@ import firebase from "firebase";
 import {add} from "ionicons/icons";
 import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
 import Suitcase from "../classes/Suitcase";
+import {getForecast} from "../Weather";
+import Forecast from "../components/Forecast";
+
+
 // import green from "../../public/assets/suitcases/green.png";
 
 interface TripDetailsProps extends RouteComponentProps<{
@@ -63,6 +67,8 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
               {content}
             </IonCardContent>
           </IonCard>
+
+          <Forecast cityName="Wellington"/>
 
           <IonItemDivider>
             <IonLabel>Suitcases</IonLabel>

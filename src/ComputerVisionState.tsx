@@ -13,7 +13,12 @@ function TagsContextProvider(props: { children: React.ReactNode; photo: Photo}) 
   const [tags, setTags] = useState([] as string[]);
 
   useEffect(() => {
-    setTags(computerVision(currentPhoto));
+    let tags_array: string[] = [];
+    const loadTags = async () => {
+      tags_array.concat(computerVision(currentPhoto));
+      setTags(tags_array);
+    };
+    loadTags();
   }, []); // Nifty trick with useEffect from: https://css-tricks.com/run-useeffect-only-once/
 
   return (

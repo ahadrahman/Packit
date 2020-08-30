@@ -11,3 +11,5 @@ export const firebaseConfig = {
 export const COMPUTER_VISION_SUBSCRIPTION_KEY = "2c7e5a811f9849b79346e44b10c3c943";
 
 export const COMPUTER_VISION_ENDPOINT = "https://swen325-assignment1-app.cognitiveservices.azure.com/";
+
+export const OPEN_WEATHER_KEY = "a8d86e9f03fb1dd99c98be61b039f593";
