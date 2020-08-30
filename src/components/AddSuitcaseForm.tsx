@@ -33,7 +33,7 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
 
   const onSubmit = (data: any) => {
     let suitcase: Suitcase = new Suitcase(data.suitcaseName, data.suitcaseColour);
-    let currentTrip: Trip = new Trip("Loading...", new Date(1975, 1, 1), new Date(1975, 1, 1));
+    let currentTrip: Trip = new Trip("Loading...", new Date(1975, 1, 1), new Date(1975, 1, 1), "Loading...");
 
 
     trips.forEach((t: Trip) => {

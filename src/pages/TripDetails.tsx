@@ -34,7 +34,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
   const { trips } = useContext(TripsContext);
 
   let currentTripName: string = match.params.id; //Drake Concert
-  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26));
+  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26), "Loading...");
 
   trips.forEach((t: Trip) => {
     if (t.tripName === currentTripName) {
@@ -68,7 +68,7 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
             </IonCardContent>
           </IonCard>
 
-          <Forecast cityName="Wellington"/>
+          <Forecast cityName={currentTrip.location}/>
 
           <IonItemDivider>
             <IonLabel>Suitcases</IonLabel>

@@ -45,7 +45,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
   let suitcaseName: string = match.params.suitcaseID;
 
   const { trips } = useContext(TripsContext);
-  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26));
+  let currentTrip: Trip = new Trip("Loading...", new Date(1975, 7, 26), new Date(1975, 8, 26), "Wellington");
   trips.forEach((t: Trip) => {
     if (t.tripName === tripName) {
       currentTrip = t;

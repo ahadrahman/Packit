@@ -4,15 +4,17 @@ export class Trip {
   tripName: string;
   startDate: Date;
   endDate: Date;
+  location: string;
   suitcases: Suitcase[];
   id: string;
 
-  constructor(tripname: string, startdate: Date, enddate: Date) {
+  constructor(tripname: string, startdate: Date, enddate: Date, location: string) {
     this.tripName = tripname;
     this.startDate = startdate;
     this.endDate = enddate;
     this.suitcases = [];
     this.id = "";
+    this.location = location;
   }
 
   display(): void {

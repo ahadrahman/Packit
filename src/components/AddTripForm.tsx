@@ -8,12 +8,13 @@ const AddTripForm: React.FC = () => {
   const { control, register, handleSubmit, errors, formState } = useForm();
 
   const onSubmit = (data: any) => {
-    let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate);
+    let trip: Trip = new Trip(data.tripName, data.startDate, data.endDate, data.location);
     let tripsRef = firebase.database().ref('/trips');
     let tripID = tripsRef.push({
       tripName: trip.tripName,
       startDate: trip.startDate,
       endDate: trip.endDate,
+      location: trip.location,
     }).key;
     if (tripID != null) {
       tripsRef.child(tripID).update({'id': tripID});
@@ -31,6 +32,15 @@ const AddTripForm: React.FC = () => {
                 <IonText color="danger">*</IonText>
               </IonLabel>
               <IonInput name="tripName" required type="text" ref={register({ required: true })}>
+              </IonInput>
+            </IonItem>
+
+            <IonItem>
+              <IonLabel position="floating">
+                Location
+                <IonText color="danger">*</IonText>
+              </IonLabel>
+              <IonInput name="location" required type="text" ref={register({ required: true })}>
               </IonInput>
             </IonItem>
 
