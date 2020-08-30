@@ -18,7 +18,6 @@ function TripsContextProvider(props: { children: React.ReactNode; }) {
     tripsRef.on('value', snapshot => {
       let data = snapshot.val();
       if (data != null) {
-        console.log(Object.values(data));
         setTrips(Object.values(data));
       }
     });

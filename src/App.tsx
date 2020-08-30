@@ -11,7 +11,7 @@ import {
   IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
+import {calendarOutline, ellipse, square, triangle} from 'ionicons/icons';
 import ListTrips from './pages/ListTrips';
 import Suitcases from './pages/Suitcases';
 import Tab3 from './pages/Tab3';
@@ -56,24 +56,14 @@ const App: React.FC = () => (
             <Route path="/trips/:id" component={TripDetails} />
             <Route path="/trips/:id/:suitcaseID" component={SuitcaseDetails} />
             <Route path="/addtrip" component={AddTrip} />
-            <Route path="/suitcases" component={Suitcases} exact={true} />
             <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
             <Route path="/trips/:id/:suitcaseID/additem" component={AddItem} />
-            <Route path="/tab3" component={Tab3} />
             <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">
             <IonTabButton tab="trips" href="/trips">
-              <IonIcon icon={triangle} />
+              <IonIcon icon={calendarOutline} />
               <IonLabel>Trips</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="suitcases" href="/suitcases">
-              <IonIcon icon={ellipse} />
-              <IonLabel>Suitcases</IonLabel>
-            </IonTabButton>
-            <IonTabButton tab="tab3" href="/tab3">
-              <IonIcon icon={square} />
-              <IonLabel>Tab 3</IonLabel>
             </IonTabButton>
           </IonTabBar>
         </IonTabs>

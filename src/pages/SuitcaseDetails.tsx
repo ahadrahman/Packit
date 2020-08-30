@@ -26,7 +26,7 @@ import {SuitcasesContextProvider} from "../SuitcasesState";
 import Trip from "../classes/Trip";
 import Suitcase from "../classes/Suitcase";
 import './SuitcaseDetails.css';
-import {add, camera, image, trash, close} from "ionicons/icons";
+import {add, camera, image, trash, close, pencilOutline} from "ionicons/icons";
 import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@capacitor/core";
 import { useCamera } from '@ionic/react-hooks/camera';
 import firebase from "firebase";
@@ -140,14 +140,13 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               <IonIcon icon={add} />
             </IonFabButton>
             <IonFabList side="top">
-              <IonFabButton onClick={async () => {
-                setPhotoSelected(await takePhoto());
-                setShowModal(true);
-              }}>
-                <IonIcon icon={camera} />
-              </IonFabButton>
-              <IonFabButton>
-                <IonIcon icon={image} />
+              {/*<IonFabButton onClick={async () => {*/}
+              {/*  setPhotoSelected(await takePhoto());*/}
+              {/*  setShowModal(true);*/}
+              {/*}}>*/}
+              <IonFabButton onClick={() => takePhoto()}>
+
+              <IonIcon icon={camera} />
               </IonFabButton>
             </IonFabList>
           </IonFab>
@@ -187,6 +186,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
             // },
               {
               text: 'Edit Text',
+              icon: pencilOutline,
               role: 'destructive',
               handler: () => {
                 if (photoSelected) {

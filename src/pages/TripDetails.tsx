@@ -18,7 +18,6 @@ import firebase from "firebase";
 import {add, trash, trashBin} from "ionicons/icons";
 import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
 import Suitcase from "../classes/Suitcase";
-import {getForecast} from "../Weather";
 import Forecast from "../components/Forecast";
 
 

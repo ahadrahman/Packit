@@ -21,10 +21,8 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
     const loadSaved = async () => {
 
       // set(PHOTO_STORAGE, "");
-      console.log(FilesystemDirectory);
 
       const photosString = await get(PHOTO_STORAGE);
-      console.log(photosString);
       const photos = (photosString ? JSON.parse(photosString) : []) as Photo[];
       let toReturnPhotos: Photo[] = [];
       if (photos.length) {
@@ -39,7 +37,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
           } else {
             // deletePhoto(photo);
           }
-          console.log(photo.filepath);
+
         }
       }
       setPhotos(toReturnPhotos);
@@ -48,7 +46,6 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
   }, [get, readFile, identifier]);
 
   const takePhoto = async (): Promise<Photo> => {
-    console.log("here");
     const cameraPhoto = await getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
@@ -66,7 +63,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       return photoCopy;
     })));
     // eslint-disable-next-line no-restricted-globals
-    location.reload();
+    // location.reload();
     return savedFileImage;
   };
 
