@@ -54,14 +54,14 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
 
   // const suitcases = SuitcasesContextProvider({null; currentTrip.id}); //Somehow pass a tripID here to get the suitcases
 
-  //
+  //git di
   // console.log(currentTrip);
   //
 
 
 
   let suitcases = currentTrip.suitcases;
-  let currentSuitcase: Suitcase = new Suitcase("Loading...", "green");
+  let currentSuitcase: Suitcase = new Suitcase("Loading...", "default");
 
   for (let x of Object.entries(suitcases)) {
     if (x[1].suitcaseName === suitcaseName) {
