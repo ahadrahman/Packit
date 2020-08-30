@@ -15,7 +15,7 @@ import {RouteComponentProps} from "react-router";
 import Trip from "../classes/Trip";
 import {Trips, TripsContext, TripsContextConsumer} from "../TripsState";
 import firebase from "firebase";
-import {add} from "ionicons/icons";
+import {add, trash, trashBin} from "ionicons/icons";
 import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
 import Suitcase from "../classes/Suitcase";
 import {getForecast} from "../Weather";
@@ -105,11 +105,22 @@ const TripDetails: React.FC<TripDetailsProps> = ({match}) => {
             </IonFabButton>
           </IonFab>
 
+          <IonFab vertical="bottom" horizontal="start" slot="fixed" >
+            <IonFabButton href="/trips" onClick={() => deleteTrip(currentTrip)} color="danger">
+              <IonIcon icon={trash} />
+            </IonFabButton>
+          </IonFab>
+
         </IonContent>
       </IonPage>
     </SuitcasesContextProvider>
   );
 };
+
+function deleteTrip(t: Trip) {
+  let dbRef = firebase.database().ref('/trips/' + t.id);
+  dbRef.remove();
+}
 
 function formatDate(t: Trip): string {
   if (t.tripName === "Loading...") {

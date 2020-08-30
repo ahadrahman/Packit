@@ -66,6 +66,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
   for (let x of Object.entries(suitcases)) {
     if (x[1].suitcaseName === suitcaseName) {
       currentSuitcase = new Suitcase(x[1].suitcaseName, x[1].colour);
+      currentSuitcase.setID(x[1].id);
     }
   }
   // let itemhref = "trips/" + currentTrip.tripName + "/" + currentSuitcase.suitcaseName + "/additem";
@@ -151,6 +152,13 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
             </IonFabList>
           </IonFab>
 
+
+          <IonFab vertical="bottom" horizontal="start" slot="fixed" >
+            <IonFabButton href={`/trips/${currentTrip.tripName}`} onClick={() => deleteSuitcase(currentTrip, currentSuitcase)} color="danger">
+              <IonIcon icon={trash} />
+            </IonFabButton>
+          </IonFab>
+
           <IonActionSheet
             isOpen={!!photoSelected}
             buttons={[{
@@ -197,5 +205,10 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
   );
 };
 
+function deleteSuitcase(t: Trip, s: Suitcase) {
+  console.log(s.id);
+  let dbRef = firebase.database().ref('/trips/' + t.id + '/suitcases/' + s.id);
+  dbRef.remove();
+}
 
 export default SuitcaseDetails;
