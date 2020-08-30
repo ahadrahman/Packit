@@ -98,7 +98,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
           {photoSelected ? (
             <IonModal isOpen={showModal} cssClass='my-custom-class' onDidDismiss={() => setPhotoSelected(undefined)}>
               <MyModal photo={photoSelected}/>
-              <IonButton onClick={() => setShowModal(false)} >Close Modal</IonButton>
+                <IonButton onClick={() => setShowModal(false)} >Close</IonButton>
             </IonModal>
           ) : (<div></div>)
           }
@@ -139,7 +139,10 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               <IonIcon icon={add} />
             </IonFabButton>
             <IonFabList side="top">
-              <IonFabButton onClick={t => takePhoto()}>
+              <IonFabButton onClick={async () => {
+                setPhotoSelected(await takePhoto());
+                setShowModal(true);
+              }}>
                 <IonIcon icon={camera} />
               </IonFabButton>
               <IonFabButton>
@@ -164,15 +167,17 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               text: 'Cancel',
               icon: close,
               role: 'cancel'
-            }, {
-              text: 'Computer Vision',
-              role: 'destructive',
-              handler: () => {
-                if (photoSelected) {
-                  computerVision(photoSelected);
-                }
-              }
-            }, {
+            },
+            //   {
+            //   text: 'Computer Vision',
+            //   role: 'destructive',
+            //   handler: () => {
+            //     if (photoSelected) {
+            //       computerVision(photoSelected);
+            //     }
+            //   }
+            // },
+              {
               text: 'Edit Text',
               role: 'destructive',
               handler: () => {

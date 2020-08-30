@@ -4,6 +4,7 @@ import { useFilesystem, base64FromPath } from '@ionic/react-hooks/filesystem';
 import { useStorage } from '@ionic/react-hooks/storage';
 import { isPlatform } from '@ionic/react';
 import { CameraResultType, CameraSource, CameraPhoto, Capacitor, FilesystemDirectory } from "@capacitor/core";
+import {computerVision} from "./analyseImage";
 
 const PHOTO_STORAGE = "photos";
 
@@ -46,7 +47,7 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
     loadSaved();
   }, [get, readFile, identifier]);
 
-  const takePhoto = async () => {
+  const takePhoto = async (): Promise<Photo> => {
     console.log("here");
     const cameraPhoto = await getPhoto({
       resultType: CameraResultType.Uri,
@@ -64,6 +65,9 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
       delete photoCopy.base64;
       return photoCopy;
     })));
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+    return savedFileImage;
   };
 
   const savePicture = async (photo: CameraPhoto, fileName: string): Promise<Photo> => {

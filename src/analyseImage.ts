@@ -13,6 +13,7 @@ const ComputerVisionClient = require('@azure/cognitiveservices-computervision').
 const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
 
 export function computerVision(photo: Photo) {
+  let tags: string[] = [];
   async.series([
     async function () {
       const computerVisionClient = new ComputerVisionClient(
@@ -21,12 +22,13 @@ export function computerVision(photo: Photo) {
         const describeURL = makeBlob(photo.base64); //image url goes here
         if (describeURL !== undefined) {
           // Request parameters.
-          let visualFeatures: VisualFeatureTypes[] = ["Tags"];
+          let visualFeatures: VisualFeatureTypes[] = ["Color"];
           // Analyze URL image
           // console.log('Analyzing URL image to describe...', describeURL.split('/').pop());
           const caption = (await computerVisionClient.describeImageInStream(describeURL, visualFeatures));
           console.log("AZURE RETURN STATEMENT HERE:");
           console.log(caption);
+          tags.push(caption.tags);
           // console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
         }
       }
@@ -40,6 +42,7 @@ export function computerVision(photo: Photo) {
   ], (err: any) => {
     throw (err);
   });
+  return tags;
 }
 
 function makeBlob(dataURL: string) {
