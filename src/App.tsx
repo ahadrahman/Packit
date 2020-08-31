@@ -13,10 +13,8 @@ import {
 import { IonReactRouter } from '@ionic/react-router';
 import {calendarOutline, ellipse, square, triangle} from 'ionicons/icons';
 import ListTrips from './pages/ListTrips';
-import Suitcases from './pages/Suitcases';
 import AddTrip from "./pages/AddTrip";
 import SuitcaseDetails from "./pages/SuitcaseDetails";
-import { defineCustomElements } from '@ionic/pwa-elements/loader'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
