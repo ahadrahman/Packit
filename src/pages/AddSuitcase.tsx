@@ -1,6 +1,5 @@
 import React from 'react';
-import {IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton, IonMenuButton} from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import {IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonBackButton} from '@ionic/react';
 import AddSuitcaseForm from "../components/AddSuitcaseForm";
 import {RouteComponentProps} from "react-router";
 
@@ -15,7 +14,6 @@ const AddSuitcase: React.FC<AddSuitcase> = ({match}) => {
         <IonHeader>
           <IonToolbar>
             <IonButtons slot="start">
-              {/*{`../assets/suitcases/${s.colour}.png`}*/}
               <IonBackButton defaultHref={`/trips/${tripName}`}/>
             </IonButtons>
             <IonTitle>Add Suitcase for {tripName}</IonTitle>

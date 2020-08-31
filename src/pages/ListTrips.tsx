@@ -1,21 +1,17 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React from 'react';
 import {
-  IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle,
+  IonCard, IonCardHeader, IonCardTitle,
   IonContent,
   IonFab,
   IonFabButton,
   IonHeader,
   IonIcon, IonItem, IonLabel, IonList,
-  IonModal,
-  IonPage, IonTabButton,
+  IonPage,
   IonTitle,
   IonToolbar
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
-import ExploreContainer from '../components/ExploreContainer';
-import './Trips.css';
 import Trip from "../classes/Trip";
-import firebase from "firebase";
 import {TripsContextConsumer, Trips} from "../TripsState";
 
 const ListTrips: React.FC = () => {

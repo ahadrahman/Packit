@@ -2,26 +2,23 @@ import {
   IonBackButton,
   IonButtons,
   IonCard, IonCardContent,
-  IonCardHeader, IonCardSubtitle, IonCardTitle,
+  IonCardHeader, IonCardTitle,
   IonContent,
   IonHeader, IonLabel,
   IonPage,
   IonTitle,
   IonToolbar,
-  IonItem, IonItemDivider, IonItemGroup, IonList, IonFab, IonFabButton, IonIcon, IonAvatar
+  IonItem, IonItemDivider, IonList, IonFab, IonFabButton, IonIcon, IonAvatar
 } from "@ionic/react";
 import React, {useContext, useEffect, useState} from "react";
 import {RouteComponentProps} from "react-router";
 import Trip from "../classes/Trip";
-import {Trips, TripsContext, TripsContextConsumer} from "../TripsState";
+import {TripsContext} from "../TripsState";
 import firebase from "firebase";
-import {add, trash, trashBin} from "ionicons/icons";
-import {Suitcases, SuitcasesContext, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
+import {add, trash} from "ionicons/icons";
+import {Suitcases, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
 import Suitcase from "../classes/Suitcase";
 import Forecast from "../components/Forecast";
-
-
-// import green from "../../public/assets/suitcases/green.png";
 
 interface TripDetailsProps extends RouteComponentProps<{
   id: string;

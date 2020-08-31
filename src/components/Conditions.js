@@ -1,9 +1,6 @@
 import React from 'react';
 import {IonCard, IonCardContent, IonCardHeader, IonCardTitle, IonAvatar} from "@ionic/react";
-import Forecast from "./Forecast";
 const Conditions = (props) => {
-  // let temp = props.responseObj.main.temp;
-  // temp = temp - 273.15;
 
   return (
     <div>

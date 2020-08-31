@@ -18,7 +18,7 @@ import {
   IonToolbar,
   IonRow,
   IonGrid,
-  IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton, IonVirtualScroll, IonList
+  IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton,
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
@@ -26,12 +26,9 @@ import {SuitcasesContextProvider} from "../SuitcasesState";
 import Trip from "../classes/Trip";
 import Suitcase from "../classes/Suitcase";
 import './SuitcaseDetails.css';
-import {add, camera, image, trash, close, pencilOutline} from "ionicons/icons";
-import {CameraResultType, CameraSource, CameraPhoto, Plugins, Camera} from "@capacitor/core";
-import { useCamera } from '@ionic/react-hooks/camera';
+import {add, camera, trash, close, pencilOutline} from "ionicons/icons";
 import firebase from "firebase";
 import {Photo, usePhotoGallery} from "../usePhotoGallery";
-import {computerVision} from "../analyseImage";
 import MyModal from "../components/EditImageTextModal";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{
@@ -52,14 +49,6 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
     }
   });
 
-  // const suitcases = SuitcasesContextProvider({null; currentTrip.id}); //Somehow pass a tripID here to get the suitcases
-
-  //git di
-  // console.log(currentTrip);
-  //
-
-
-
   let suitcases = currentTrip.suitcases;
   let currentSuitcase: Suitcase = new Suitcase("Loading...", "default");
 
@@ -69,13 +58,6 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
       currentSuitcase.setID(x[1].id);
     }
   }
-  // let itemhref = "trips/" + currentTrip.tripName + "/" + currentSuitcase.suitcaseName + "/additem";
-
-
-    // if (image instanceof Camera) {
-    //   console.log(image.base64String);
-    // }
-    // let captureDataUrl = 'data:image/jpeg;base64,' + image.base64String;
 
   const { deletePhoto, photos, takePhoto } = usePhotoGallery(currentTrip.tripName, currentSuitcase.suitcaseName);
   const [photoSelected, setPhotoSelected] = useState<Photo>();
@@ -105,9 +87,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
           }
 
           <IonCard>
-            {/*  <IonAvatar slot="start">*/}
                 <IonImg src={`../assets/suitcases/${currentSuitcase.colour}.png`} className="suitcaseDetails"/>
-              {/*</IonAvatar>*/}
               <IonCardHeader>
                 <IonCardTitle>
                   {currentSuitcase.suitcaseName}
@@ -140,10 +120,6 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               <IonIcon icon={add} />
             </IonFabButton>
             <IonFabList side="top">
-              {/*<IonFabButton onClick={async () => {*/}
-              {/*  setPhotoSelected(await takePhoto());*/}
-              {/*  setShowModal(true);*/}
-              {/*}}>*/}
               <IonFabButton color="secondary" onClick={() => takePhoto()}>
 
               <IonIcon icon={camera} />
@@ -180,15 +156,6 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
                 }
               }
             },
-            //   {
-            //   text: 'Computer Vision',
-            //   role: 'destructive',
-            //   handler: () => {
-            //     if (photoSelected) {
-            //       computerVision(photoSelected);
-            //     }
-            //   }
-            // },
               {
               text: 'Edit Text',
               icon: pencilOutline,

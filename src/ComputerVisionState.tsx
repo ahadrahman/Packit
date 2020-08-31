@@ -23,10 +23,6 @@ function TagsContextProvider(props: { children: React.ReactNode; photo: Photo}) 
     loadTags();
   }, []); // Nifty trick with useEffect from: https://css-tricks.com/run-useeffect-only-once/
 
-  // useEffect(() => {
-  //   setTags(computerVision(currentPhoto));
-  // }, []); // Nifty trick with useEffect from: https://css-tricks.com/run-useeffect-only-once/
-
   return (
     <TagsContext.Provider value={{tags : tags}}>{props.children}</TagsContext.Provider>
   )

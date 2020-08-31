@@ -6,10 +6,7 @@ import {
   IonLabel,
   IonText,
   IonInput,
-  IonDatetime,
   IonButton,
-  IonSelectOption,
-  IonSelect,
   IonRadioGroup,
   IonListHeader,
   IonRadio, IonAvatar, IonToast
@@ -18,11 +15,7 @@ import Trip from "../classes/Trip";
 import firebase from "firebase";
 import Suitcase from "../classes/Suitcase";
 import {TripsContext} from "../TripsState";
-import {RouteComponentProps} from "react-router";
 
-// type SuitcaseProps {
-//   nameOfTrip: string;
-// }
 
 const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
   let tripName = nameOfTrip;
@@ -43,14 +36,6 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
       }
     });
 
-    // console.log(currentTrip);
-    // if (currentTrip.suitcases[0].suitcaseName === "") {
-    //   console.log("got to here")
-    //   currentTrip.suitcases[0] = su
-    // }
-    // currentTrip.suitcases.push(suitcase);
-    // console.log(currentTrip);
-
     let dbRef = firebase.database().ref('/trips/' + currentTrip.id + '/suitcases');
     let suitcaseID = dbRef.push({
       suitcaseName: suitcase.suitcaseName,
@@ -58,11 +43,8 @@ const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {
     }).key;
     if (suitcaseID != null) {
       dbRef.child(suitcaseID).update({'id': suitcaseID});
-      // suitcase.setID(suitcaseID);
-      // currentTrip.suitcases.push(suitcase);
     }
     dbRef.child("/0").remove();
-    // tripsRef.child(currentTrip.id).update({'suitcases': "will put suitcases here"});
     setShowToast(true);
 
 

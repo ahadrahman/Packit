@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import {OPEN_WEATHER_KEY} from "../credentials";
 import Conditions from "./Conditions.js";
-import {RouteComponentProps} from "react-router";
 import {IonCard, IonCardHeader, IonCardTitle} from "@ionic/react";
 
 const weatherKey = OPEN_WEATHER_KEY;
-const searchTerm = "Wellington";
-
 
 const Forecast: React.FC<{cityName: string}> = ({cityName}) => {
   let city = cityName;

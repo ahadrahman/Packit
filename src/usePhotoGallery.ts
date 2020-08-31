@@ -4,7 +4,6 @@ import { useFilesystem, base64FromPath } from '@ionic/react-hooks/filesystem';
 import { useStorage } from '@ionic/react-hooks/storage';
 import { isPlatform } from '@ionic/react';
 import { CameraResultType, CameraSource, CameraPhoto, Capacitor, FilesystemDirectory } from "@capacitor/core";
-import {computerVision} from "./analyseImage";
 
 const PHOTO_STORAGE = "photos";
 
@@ -34,8 +33,6 @@ export function usePhotoGallery(tripName: string, suitcaseName: string) {
             });
             photo.base64 = `data:image/jpeg;base64,${file.data}`;
             toReturnPhotos.push(photo);
-          } else {
-            // deletePhoto(photo);
           }
 
         }

@@ -16,7 +16,6 @@ import ListTrips from './pages/ListTrips';
 import Suitcases from './pages/Suitcases';
 import AddTrip from "./pages/AddTrip";
 import SuitcaseDetails from "./pages/SuitcaseDetails";
-import AddItem from "./pages/AddItem";
 import { defineCustomElements } from '@ionic/pwa-elements/loader'
 
 /* Core CSS required for Ionic components to work properly */
@@ -56,7 +55,6 @@ const App: React.FC = () => (
             <Route path="/trips/:id/:suitcaseID" component={SuitcaseDetails} />
             <Route path="/addtrip" component={AddTrip} />
             <Route path="/trips/:id/addsuitcase" component={AddSuitcase} />
-            <Route path="/trips/:id/:suitcaseID/additem" component={AddItem} />
             <Route path="/" render={() => <Redirect to="/trips" />} exact={true} />
           </IonRouterOutlet>
           <IonTabBar slot="bottom">

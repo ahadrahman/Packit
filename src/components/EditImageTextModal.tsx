@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {
-  IonHeader,
   IonToolbar,
   IonTitle,
   IonContent,
@@ -11,11 +10,9 @@ import {
   IonInput,
   IonRadioGroup, IonListHeader, IonAvatar, IonRadio, IonButton, IonImg
 } from "@ionic/react";
-import {Photo, usePhotoGallery} from "../usePhotoGallery";
+import {Photo} from "../usePhotoGallery";
 import { useForm} from "react-hook-form";
-import {computerVision} from "../analyseImage";
 import {Tags, TagsContextConsumer, TagsContextProvider} from "../ComputerVisionState";
-import {Suitcases, SuitcasesContextConsumer} from "../SuitcasesState";
 import './EditImageTextModal.css';
 
 
@@ -24,8 +21,6 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
 
   const { control, register, handleSubmit, errors, formState } = useForm();
   const [selected, setSelected] = useState<string>('custom-text');
-
-  // let visionTags = computerVision(photo);
 
   const onSubmit = (data: any) => {
     console.log(data);

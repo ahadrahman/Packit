@@ -1,9 +1,7 @@
 import { COMPUTER_VISION_SUBSCRIPTION_KEY, COMPUTER_VISION_ENDPOINT} from "./credentials";
 import {Photo} from "./usePhotoGallery";
-import {details, visualFeatures} from "@azure/cognitiveservices-computervision/esm/models/parameters";
 import {VisualFeatureTypes} from "@azure/cognitiveservices-computervision/esm/models";
 import React, {Dispatch} from "react";
-// import {VisualFeatureTypes} from "@azure/cognitiveservices-computervision/esm/models";
 const async = require('async');
 const fs = require('fs');
 const https = require('https');
@@ -25,12 +23,10 @@ export function computerVision(photo: Photo, setTags: Dispatch<React.SetStateAct
           // Request parameters.
           let visualFeatures: VisualFeatureTypes[] = ["Color"];
           // Analyze URL image
-          // console.log('Analyzing URL image to describe...', describeURL.split('/').pop());
           const caption = (await computerVisionClient.describeImageInStream(describeURL, visualFeatures));
           console.log("AZURE RETURN STATEMENT HERE:");
           console.log(caption.tags);
           setTags(caption.tags);
-          // console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
         }
       }
 
@@ -67,5 +63,3 @@ function makeBlob(dataURL: string) {
 
   return new Blob([uInt8Array], { type: contentType });
 }
-
-// computerVision();
