@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
-import Trip from "./classes/Trip";
+import Trip from "../classes/Trip";
 import firebase from "firebase";
 
 export interface Trips {

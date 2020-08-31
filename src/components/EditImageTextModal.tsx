@@ -10,9 +10,9 @@ import {
   IonInput,
   IonRadioGroup, IonListHeader, IonAvatar, IonRadio, IonButton, IonImg
 } from "@ionic/react";
-import {Photo} from "../usePhotoGallery";
+import {Photo} from "../functions/usePhotoGallery";
 import { useForm} from "react-hook-form";
-import {Tags, TagsContextConsumer, TagsContextProvider} from "../ComputerVisionState";
+import {Tags, TagsContextConsumer, TagsContextProvider} from "../states/ComputerVisionState";
 import './EditImageTextModal.css';
 
 

@@ -1,4 +1,4 @@
-import { COMPUTER_VISION_SUBSCRIPTION_KEY, COMPUTER_VISION_ENDPOINT} from "./credentials";
+import { COMPUTER_VISION_SUBSCRIPTION_KEY, COMPUTER_VISION_ENDPOINT} from "../credentials";
 import {Photo} from "./usePhotoGallery";
 import {VisualFeatureTypes} from "@azure/cognitiveservices-computervision/esm/models";
 import React, {Dispatch} from "react";

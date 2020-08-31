@@ -13,10 +13,10 @@ import {
 import React, {useContext, useEffect, useState} from "react";
 import {RouteComponentProps} from "react-router";
 import Trip from "../classes/Trip";
-import {TripsContext} from "../TripsState";
+import {TripsContext} from "../states/TripsState";
 import firebase from "firebase";
 import {add, trash} from "ionicons/icons";
-import {Suitcases, SuitcasesContextConsumer, SuitcasesContextProvider} from "../SuitcasesState";
+import {Suitcases, SuitcasesContextConsumer, SuitcasesContextProvider} from "../states/SuitcasesState";
 import Suitcase from "../classes/Suitcase";
 import Forecast from "../components/Forecast";
 

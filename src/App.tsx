@@ -38,9 +38,9 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import {firebaseConfig} from "./credentials";
 import TripDetails from "./pages/TripDetails";
-import {TripsContextProvider} from "./TripsState";
+import {TripsContextProvider} from "./states/TripsState";
 import AddSuitcase from './pages/AddSuitcase';
-import {SuitcasesContextProvider} from "./SuitcasesState";
+import {SuitcasesContextProvider} from "./states/SuitcasesState";
 
 firebase.initializeApp(firebaseConfig);
 

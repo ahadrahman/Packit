@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
-import {Photo} from "./usePhotoGallery";
-import {computerVision} from "./analyseImage";
+import {Photo} from "../functions/usePhotoGallery";
+import {computerVision} from "../functions/analyseImage";
 
 export interface Tags {
   tags : string[]

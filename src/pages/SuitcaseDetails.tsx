@@ -21,14 +21,14 @@ import {
   IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton,
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
-import {TripsContext} from "../TripsState";
-import {SuitcasesContextProvider} from "../SuitcasesState";
+import {TripsContext} from "../states/TripsState";
+import {SuitcasesContextProvider} from "../states/SuitcasesState";
 import Trip from "../classes/Trip";
 import Suitcase from "../classes/Suitcase";
 import './SuitcaseDetails.css';
 import {add, camera, trash, close, pencilOutline} from "ionicons/icons";
 import firebase from "firebase";
-import {Photo, usePhotoGallery} from "../usePhotoGallery";
+import {Photo, usePhotoGallery} from "../functions/usePhotoGallery";
 import MyModal from "../components/EditImageTextModal";
 
 interface SuitcaseDetailsProps extends RouteComponentProps<{

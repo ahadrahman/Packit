@@ -14,7 +14,7 @@ import {
 import Trip from "../classes/Trip";
 import firebase from "firebase";
 import Suitcase from "../classes/Suitcase";
-import {TripsContext} from "../TripsState";
+import {TripsContext} from "../states/TripsState";
 
 
 const AddSuitcaseForm: React.FC<{nameOfTrip:string}> = ({nameOfTrip}) => {

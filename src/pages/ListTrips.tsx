@@ -12,7 +12,7 @@ import {
 } from '@ionic/react';
 import { add } from 'ionicons/icons';
 import Trip from "../classes/Trip";
-import {TripsContextConsumer, Trips} from "../TripsState";
+import {TripsContextConsumer, Trips} from "../states/TripsState";
 
 const ListTrips: React.FC = () => {
   return (

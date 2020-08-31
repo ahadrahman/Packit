@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import firebase from "firebase";
-import Suitcase from "./classes/Suitcase";
+import Suitcase from "../classes/Suitcase";
 
 export interface Suitcases {
   suitcases : Suitcase[]
