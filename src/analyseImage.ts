@@ -27,7 +27,7 @@ export function computerVision(photo: Photo) {
           // console.log('Analyzing URL image to describe...', describeURL.split('/').pop());
           const caption = (await computerVisionClient.describeImageInStream(describeURL, visualFeatures));
           console.log("AZURE RETURN STATEMENT HERE:");
-          console.log(caption);
+          console.log(caption.tags);
           tags.push(caption.tags);
           // console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
         }

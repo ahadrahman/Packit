@@ -14,7 +14,6 @@ import { IonReactRouter } from '@ionic/react-router';
 import {calendarOutline, ellipse, square, triangle} from 'ionicons/icons';
 import ListTrips from './pages/ListTrips';
 import Suitcases from './pages/Suitcases';
-import Tab3 from './pages/Tab3';
 import AddTrip from "./pages/AddTrip";
 import SuitcaseDetails from "./pages/SuitcaseDetails";
 import AddItem from "./pages/AddItem";

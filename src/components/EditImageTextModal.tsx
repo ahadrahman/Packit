@@ -9,13 +9,14 @@ import {
   IonLabel,
   IonText,
   IonInput,
-  IonRadioGroup, IonListHeader, IonAvatar, IonRadio, IonButton
+  IonRadioGroup, IonListHeader, IonAvatar, IonRadio, IonButton, IonImg
 } from "@ionic/react";
 import {Photo} from "../usePhotoGallery";
 import { useForm} from "react-hook-form";
 import {computerVision} from "../analyseImage";
 import {Tags, TagsContextConsumer, TagsContextProvider} from "../ComputerVisionState";
 import {Suitcases, SuitcasesContextConsumer} from "../SuitcasesState";
+import './EditImageTextModal.css';
 
 
 const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
@@ -44,6 +45,8 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
         </IonToolbar>
         <form onSubmit={handleSubmit(onSubmit)}>
           <IonList lines="full" class="ion-no-margin ion-no-padding">
+
+            <img src={currentPhoto.base64 ?? currentPhoto.webviewPath} className="item-picture"/>
 
             <IonItem>
               <IonLabel position="floating">
