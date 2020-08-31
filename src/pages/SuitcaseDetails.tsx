@@ -18,7 +18,7 @@ import {
   IonToolbar,
   IonRow,
   IonGrid,
-  IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton
+  IonCol, IonItemDivider, IonLabel, IonActionSheet, IonModal, IonButton, IonVirtualScroll, IonList
 } from "@ionic/react";
 import {RouteComponentProps} from "react-router";
 import {TripsContext} from "../TripsState";
@@ -144,7 +144,7 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               {/*  setPhotoSelected(await takePhoto());*/}
               {/*  setShowModal(true);*/}
               {/*}}>*/}
-              <IonFabButton onClick={() => takePhoto()}>
+              <IonFabButton color="secondary" onClick={() => takePhoto()}>
 
               <IonIcon icon={camera} />
               </IonFabButton>
@@ -167,13 +167,18 @@ const SuitcaseDetails: React.FC<SuitcaseDetailsProps> = ({match}) => {
               handler: () => {
                 if (photoSelected) {
                   deletePhoto(photoSelected);
-                  // setPhotoSelected(undefined);
+                  setPhotoSelected(undefined);
                 }
               }
             }, {
               text: 'Cancel',
               icon: close,
-              role: 'cancel'
+              role: 'cancel',
+              handler: () => {
+                if (photoSelected) {
+                  setPhotoSelected(undefined);
+                }
+              }
             },
             //   {
             //   text: 'Computer Vision',

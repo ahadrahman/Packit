@@ -2,6 +2,7 @@ import { COMPUTER_VISION_SUBSCRIPTION_KEY, COMPUTER_VISION_ENDPOINT} from "./cre
 import {Photo} from "./usePhotoGallery";
 import {details, visualFeatures} from "@azure/cognitiveservices-computervision/esm/models/parameters";
 import {VisualFeatureTypes} from "@azure/cognitiveservices-computervision/esm/models";
+import React, {Dispatch} from "react";
 // import {VisualFeatureTypes} from "@azure/cognitiveservices-computervision/esm/models";
 const async = require('async');
 const fs = require('fs');
@@ -12,7 +13,7 @@ const sleep = require('util').promisify(setTimeout);
 const ComputerVisionClient = require('@azure/cognitiveservices-computervision').ComputerVisionClient;
 const ApiKeyCredentials = require('@azure/ms-rest-js').ApiKeyCredentials;
 
-export function computerVision(photo: Photo) {
+export function computerVision(photo: Photo, setTags: Dispatch<React.SetStateAction<string[]>>) {
   let tags: string[] = [];
   async.series([
     async function () {
@@ -28,7 +29,7 @@ export function computerVision(photo: Photo) {
           const caption = (await computerVisionClient.describeImageInStream(describeURL, visualFeatures));
           console.log("AZURE RETURN STATEMENT HERE:");
           console.log(caption.tags);
-          tags.push(caption.tags);
+          setTags(caption.tags);
           // console.log(`This may be ${caption.text} (${caption.confidence.toFixed(2)} confidence)`);
         }
       }

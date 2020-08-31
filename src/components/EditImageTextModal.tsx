@@ -11,7 +11,7 @@ import {
   IonInput,
   IonRadioGroup, IonListHeader, IonAvatar, IonRadio, IonButton, IonImg
 } from "@ionic/react";
-import {Photo} from "../usePhotoGallery";
+import {Photo, usePhotoGallery} from "../usePhotoGallery";
 import { useForm} from "react-hook-form";
 import {computerVision} from "../analyseImage";
 import {Tags, TagsContextConsumer, TagsContextProvider} from "../ComputerVisionState";
@@ -38,6 +38,7 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
   };
 
   return (
+    <IonContent>
     <TagsContextProvider photo={currentPhoto}>
       <div>
         <IonToolbar color="primary">
@@ -56,6 +57,7 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
               <IonInput name="itemName" required type="text" disabled={selected !== "custom-text"} ref={register({ required: false })} value={photo.description}>
               </IonInput>
             </IonItem>
+
 
             <IonRadioGroup value={selected} name="optionSelected" onIonChange={e => setSelected(e.detail.value)} ref={register({ required: true })}>
               <IonListHeader>
@@ -86,6 +88,7 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
                   </TagsContextConsumer>
             </IonRadioGroup>
 
+
           </IonList>
 
           <IonButton expand="block" type="submit" class="ion-no-margin">
@@ -94,6 +97,7 @@ const MyModal: React.FC<{photo:Photo}> = ({photo}) => {
         </form>
       </div>
     </TagsContextProvider>
+      </IonContent>
   )
 };
 

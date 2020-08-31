@@ -15,11 +15,17 @@ function TagsContextProvider(props: { children: React.ReactNode; photo: Photo}) 
   useEffect(() => {
     let tags_array: string[] = [];
     const loadTags = async () => {
-      tags_array.concat(computerVision(currentPhoto));
+      tags_array.concat(computerVision(currentPhoto, setTags));
+      console.log("in computer vision state");
+      console.log(tags);
       setTags(tags_array);
     };
     loadTags();
   }, []); // Nifty trick with useEffect from: https://css-tricks.com/run-useeffect-only-once/
+
+  // useEffect(() => {
+  //   setTags(computerVision(currentPhoto));
+  // }, []); // Nifty trick with useEffect from: https://css-tricks.com/run-useeffect-only-once/
 
   return (
     <TagsContext.Provider value={{tags : tags}}>{props.children}</TagsContext.Provider>
