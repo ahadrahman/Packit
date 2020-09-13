@@ -10,6 +10,9 @@
 
 # production
 /build
+*.idea/
+*/.idea/
+Packit_Ass2/.idea/
 
 # misc
 .DS_Store
