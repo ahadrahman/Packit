@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {OPEN_WEATHER_KEY} from "../credentials";
 import Conditions from "./Conditions.js";
 import {IonCard, IonCardHeader, IonCardTitle} from "@ionic/react";
@@ -8,17 +8,23 @@ const weatherKey = OPEN_WEATHER_KEY;
 const Forecast: React.FC<{cityName: string}> = ({cityName}) => {
   let city = cityName;
   let [responseObj, setResponseObj] = useState({});
-  if (city !== "Loading...") {
 
-    fetch('https://api.openweathermap.org/data/2.5/weather?units=celsius&q=' + city + '&appid=' + weatherKey)
-      .then(response => response.json())
-      .then(response => {
-        setResponseObj(response)
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  useEffect(() => {
+    if (city !== "Loading...") {
+      fetch('https://api.openweathermap.org/data/2.5/weather?units=celsius&q=' + city + '&appid=' + weatherKey)
+        .then(response => response.json())
+        .then(response => {
+          setResponseObj(response)
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      setResponseObj(0);
+    }
+  },[city]);
 
+  if (responseObj !== 0) {
     return (
       <div>
         <Conditions responseObj={responseObj}/>
