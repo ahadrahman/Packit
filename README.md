@@ -35,4 +35,4 @@ The app's UI changes based on the user's device (iOS or Android). To see this in
 developer tools to select a device to emulate.
 
 ## Screenshots
-To see screenshots of my app in action, click [here]().
+To see screenshots of my app in action, click [here](https://github.com/ahadrahman/Packit/tree/master/Screenshots).
